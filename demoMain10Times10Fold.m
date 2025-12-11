@@ -1,6 +1,6 @@
 clearvars;
                                                                       
-dataname='colon10';
+dataname='Hepatitis';
 opt.algorithm='optimize_WU';
 load(fullfile('dataset', [dataname, '.mat']));
 data=[X, Y];     
@@ -53,10 +53,10 @@ for t=1:10
         Y_train=Y(trainnum==1,:);
 
         if strcmp(opt.algorithm , 'optimize_WU')
-            opt.r = 20;
+            opt.r = 5;
             opt.lambda1 = 1000;
-            opt.lambda2 = 1000;
-            opt.lambda3 = 1000;
+            opt.lambda2 = 1;
+            opt.lambda3 = 100;
             opt.lrU = 1e-4;
             opt.tol = 1e-5;                                    
             opt.max_iter = 100;
@@ -143,5 +143,6 @@ total_macro_f1 = nanmean(all_macro_f1(:));
 [order_select_num,order_select_id] = sort(SelectFeaNum,'descend');
 fea_w_1_1= all_fea_w{1,1};
 save(['resultrbf\',char(dataname),'_svm_',char(opt.algorithm),'_best_result_',num2str(total_acc),'_',num2str(total_macro_precision),'_',num2str(total_macro_recall),'_',num2str(total_macro_f1),'.mat'],'all_indices', 'fea_w_1_1', 'all_para', 'all_acc', 'all_macro_precision', 'all_macro_recall', 'all_macro_f1');
+
 
 
